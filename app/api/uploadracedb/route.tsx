@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic' // defaults to auto
 import { NextApiRequest, NextApiResponse } from "next"
-
+import fs from "fs" 
 import { NextRequest } from "next/server"
 import { NextResponse } from "next/server";
 import path from "path";
@@ -34,9 +34,12 @@ export async function POST(req: NextRequest, res: any) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const filename =  file.name.replaceAll(" ", "_");
     console.log(filename);
+    
+
     try {
+        fs.unlinkSync("public/assets/RaceTiming.db");
         await writeFile(
-        path.join(process.cwd(), "public/assets/" + filename),
+        path.join(process.cwd(), "public/assets/RaceTiming.db"),
         buffer
     );
     return NextResponse.json({ Message: "Success", status: 201 });
