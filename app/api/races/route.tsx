@@ -12,20 +12,14 @@ const dummyData = [{"RaceId": 1,  "RaceDescription": "The Race", "SplitId": 1,  
 
 export async function GET(request: NextRequest) {
     try {
-        const searchParams = request.nextUrl.searchParams
-        const query = searchParams.get('query');
-        console.log(query);
+
         console.log(DB);
         console.log(collection);
         const db = (await clientPromise).db(DB);
    
-      
-
-        //const allRaces = await db.collection(collection).distinct( "RaceDescription" )
-
         const allRaces = await db.collection(collection).find({}).toArray()
 
-        console.log(allRaces)
+        console.log("Races", allRaces)
         return Response.json(allRaces)
     } catch (e) {
         console.log(e)
