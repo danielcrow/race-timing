@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
-import RaceSelector from '../../../components/RaceSelector/RaceSelector'
-import Athletes from '../../../components/manage/Athletes/Athletes'
-import Athlete from '../../../components/manage/Athlete/Athlete'
+import RaceSelector from '/components/RaceSelector/RaceSelector'
+import Athletes from '/components/manage/Athletes/Athletes'
+import Athlete from '/components/manage/Athlete/Athlete'
 import { useParams } from 'next/navigation'
 
 export default function Page() {
