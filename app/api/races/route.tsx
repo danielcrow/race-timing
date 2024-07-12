@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
         console.log("DB",DB);
         console.log("Collection", collection);
         const db = (await clientPromise).db(DB);
-   
+        console.log("DbObj", db)
         const allRaces = await db.collection(collection).find({}).toArray()
 
         console.log("Races", allRaces)
