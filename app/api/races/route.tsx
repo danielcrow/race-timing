@@ -8,7 +8,7 @@ const DB =process.env.MONGODB
 const collection: string  = "races"
 
 const dummyData = [{"RaceId": 1,  "RaceDescription": "The Race", "SplitId": 1,  "BibNumber": 1,  "SplitTime": "12:00:01.001","AthleteID": 1 },{"RaceId": 1,  "RaceDescription": "The Race", "SplitId": 1,  "BibNumber": 1,  "SplitTime": "12:00:01.001","AthleteID": 1 }]
-
+export const revalidate = 0; // this is the new line added
 
 
 export async function GET(request: NextRequest) {
@@ -17,7 +17,8 @@ export async function GET(request: NextRequest) {
         console.log("DB",DB);
         console.log("Collection", collection);
         const db = (await clientPromise).db(DB);
-       // console.log("DbObj", db)
+        console.log("DbObj", db)
+        
         const allRaces = await db.collection(collection).find({}).toArray()
 
         console.log("Races", allRaces)
