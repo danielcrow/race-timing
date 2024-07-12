@@ -16,7 +16,7 @@ interface Props {
   raceId: string
  
 }
-
+//Type for races
 interface Races {
   _id: string,
   RaceId: number,
