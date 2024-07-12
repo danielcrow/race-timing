@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic' // defaults to auto
 import { NextApiRequest, NextApiResponse } from "next"
+//import clientPromise from "./../database"
 import clientPromise from "./../database"
 import { NextRequest } from "next/server"
 
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
         console.log("DB",DB);
         console.log("Collection", collection);
         const db = (await clientPromise).db(DB);
-        console.log("DbObj", db)
+       // console.log("DbObj", db)
         const allRaces = await db.collection(collection).find({}).toArray()
 
         console.log("Races", allRaces)
