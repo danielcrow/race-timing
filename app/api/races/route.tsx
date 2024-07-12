@@ -13,8 +13,10 @@ const dummyData = [{"RaceId": 1,  "RaceDescription": "The Race", "SplitId": 1,  
 export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams
-        const query = searchParams.get('query')
-        console.log(query)
+        const query = searchParams.get('query');
+        console.log(query);
+        console.log(DB);
+        console.log(collection);
         const db = (await clientPromise).db(DB);
    
       
