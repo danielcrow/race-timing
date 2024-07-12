@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
 
        
         const allAthletes = await athletesCollection.find(query).toArray();
-
+        console.log(allAthletes)
 
         const allRaces = await racesplits.find(query).sort({SplitDateTime: 1}).toArray();
     
