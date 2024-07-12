@@ -11,7 +11,7 @@ export default function Page() {
 
     return <div>
            
-            Here we go
+            Home Page
            
       </div>
   }
