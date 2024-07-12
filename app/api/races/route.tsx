@@ -13,8 +13,8 @@ const dummyData = [{"RaceId": 1,  "RaceDescription": "The Race", "SplitId": 1,  
 export async function GET(request: NextRequest) {
     try {
 
-        console.log(DB);
-        console.log(collection);
+        console.log("DB",DB);
+        console.log("Collection", collection);
         const db = (await clientPromise).db(DB);
    
         const allRaces = await db.collection(collection).find({}).toArray()
