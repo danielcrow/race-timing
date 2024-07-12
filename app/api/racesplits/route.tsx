@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams
         const raceid = searchParams.get('raceid')
-        const racestarttime:string = searchParams.get('racestarttime')
+        const racestarttime:any = searchParams.get('racestarttime')
         const RaceStartTime:Date = new Date(racestarttime)
         console.log(raceid)
         const db = (await clientPromise).db(DB);

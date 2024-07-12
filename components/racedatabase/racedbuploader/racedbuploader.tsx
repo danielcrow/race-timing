@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button';
 
 export default function racedbuploader(props: any) {
     
-    const handleFileUpload = async (event: {target: { files: any[]; }}) => {
-      console.log("Hello")
+    const handleFileUpload = async (event: {target: { files: FileList|null; }}) => {
+      //check an event has happened if not fail it
+        if (!event.target.files) return;
+        
         const file = event.target.files[0];
         const formData = new FormData();
         formData.append('file', file);
@@ -27,6 +29,7 @@ export default function racedbuploader(props: any) {
           // Handle error
             props.dbstatus(false)
         }
+      
       };
 
     return <div>

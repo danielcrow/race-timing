@@ -10,13 +10,27 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export default function raceselector(props) {
+
+interface Props {
+  newRace: (race:string)=>void,
+  raceId: string
+ 
+}
+
+interface Races {
+  _id: string,
+  RaceId: number,
+  RaceDescription: string,
+  StartDateTime: Date
+ 
+}
+export default function RaceSelector({newRace = () => {}, raceId}:Props) {
   
     const [races, setData] = useState([])
     const [isLoading, setLoading] = useState(true)
-    const [selectedOption, setSelectedOption] = useState(props.raceId)
+    const [selectedOption, setSelectedOption] = useState(raceId)
 
-    console.log("default", props.raceId)
+    console.log("default", raceId)
     useEffect(() => {
         fetch('/api/races')
           .then((res) => res.json())
@@ -29,9 +43,13 @@ export default function raceselector(props) {
 
     const onChange = (race: any) =>{
       setSelectedOption(race.RaceId)
+
       for(let r in races){
-        if (races[r].RaceId == race){
-          props.race(races[r])
+        console.log("in the races", races[r])
+       const raceChoice:Races = races[r]
+        if (raceChoice.RaceId == race){
+          console.log(races[r])
+          newRace(races[r])
         }
       }
 
@@ -40,8 +58,8 @@ export default function raceselector(props) {
     const getRaceContent = (races: any) => {
         let content = [];
         for (let idx in races){
-            if(races[idx].RaceId == props.raceId){
-              content.push(<SelectItem value={races[idx].RaceId} key={races[idx].RaceId} selected>{races[idx].RaceDescription}</SelectItem>)
+            if(races[idx].RaceId == raceId){
+              content.push(<SelectItem value={races[idx].RaceId} key={races[idx].RaceId}>{races[idx].RaceDescription}</SelectItem>)
 
             }else{
                 content.push(<SelectItem value={races[idx].RaceId} key={races[idx].RaceId}>{races[idx].RaceDescription}</SelectItem>)

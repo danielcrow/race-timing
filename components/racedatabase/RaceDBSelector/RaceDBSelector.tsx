@@ -10,7 +10,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export default function RaceDBSelector(props) {
+interface Props {
+  SetLiveRace: (race:string)=>void
+ 
+}
+
+export default function RaceDBSelector({SetLiveRace = () => {}}:Props) {
   
     const [races, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
@@ -26,13 +31,13 @@ export default function RaceDBSelector(props) {
 
     const onChange = (race: any) =>{
         console.log(race)
-      props.race(race);
+        SetLiveRace(race);
    
     }  
     const getRaceContent = (races: any) => {
         let content = [];
         for (let idx in races){
-                content.push(<SelectItem value={races[idx].ID}>{races[idx].RaceName}</SelectItem>)
+                content.push(<SelectItem value={races[idx].ID} key={races[idx].ID} >{races[idx].RaceName}</SelectItem>)
                //content.push({"value": data[idx], "label": data[idx]})
         }
         return content

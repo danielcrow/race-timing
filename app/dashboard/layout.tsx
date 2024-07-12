@@ -1,5 +1,5 @@
 import Link from "next/link";
-import NewsletterFooter from '@/components/NewsletterFooter/NewsLetterFooter';
+
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 export default function DashboardLayout({
@@ -20,7 +20,7 @@ export default function DashboardLayout({
         </main>
         <Footer></Footer>
       </div>
-      <NewsletterFooter />
+
     </div>
   );
 }

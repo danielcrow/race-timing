@@ -1,8 +1,9 @@
 'use client'
-import RaceSelector from '@/components/raceselector/raceselector'
-import Athletes from '@/components/manage/athletes/athletes'
 import { useState, useEffect } from 'react'
-import Athlete from '@/components/manage/athletes/athlete'
+import RaceSelector from '@/components/RaceSelector/RaceSelector'
+import Athletes from '@/components/manage/Athletes/Athletes'
+
+import Athlete from '@/components/manage/Athlete/Athlete'
 import { useParams } from 'next/navigation'
 
 export default function Page() {
@@ -12,27 +13,33 @@ export default function Page() {
     setRace(race.RaceId);
 
   }
-
-  const [athleteId, setAthleteId] = useState({});
-  const [race, setRace] = useState("")
   const params = useParams()
   
   const type =params.AthleteId[0]
   const id = params.AthleteId[1]
-
-  useEffect(() => {
+  
+  const [race, setRace] = useState(id)
+  const [athleteId, setAthleteId] = useState(id);
+  //const [race, setRace] = useState("")
+  
+  
+  /*useEffect(() => {
     setRace(id)
-  }, [])
-
+  },[])
+*/
   console.log(params)
   if(type=="race"){
+
     return <div>
-        <RaceSelector race={newRace} />
+        
+        <RaceSelector newRace={newRace} raceId="" />
         <div><Athletes race={race}></Athletes></div>
         </div>
 
   }else{
+ 
     return <div>
+       
         <Athlete id={id}></Athlete>
         </div>
 

@@ -11,7 +11,14 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
-export default function racesplits(props) {
+  interface Props {
+    race: string,
+    raceDescription: string,
+    startTime: string
+   
+  }
+
+export default function RaceSplits(props:Props) {
 
     const [data, setData] = useState([])
     const [isLoading, setLoading] = useState(true)
@@ -31,7 +38,7 @@ export default function racesplits(props) {
             setData(data)
             setLoading(false)
           })
-      }, [])
+      }, [props])
 
 
       const getRaceContent = (data: any) => {
@@ -59,8 +66,8 @@ export default function racesplits(props) {
                   
                     if(splits[idv]!=undefined){
                         const key = Object.keys(splits[idv])
-                    
-                        splitContent.push(<TableCell>{splits[idv][key]}</TableCell>)
+                        console.log("checking", splits[idv])
+                        splitContent.push(<TableCell>{splits[idv]["time"]}</TableCell>)
                     }
                 }
                 return splitContent;
@@ -75,10 +82,10 @@ export default function racesplits(props) {
             content.push(<TableHead className="w-[100px]">Surname</TableHead>)
             const firstRowSplits=data[0]["splits"];
           
-            const keys = Object.keys(firstRowSplits)
-  
+            //const keys = Object.keys(firstRowSplits)
+            
             for(let idx in firstRowSplits){
-                content.push(<TableHead className="w-[100px]">{Object.keys(firstRowSplits[idx])[0]}</TableHead>)
+                content.push(<TableHead className="w-[100px]">{firstRowSplits[idx]["name"]}</TableHead>)
             }
         }
         return content;

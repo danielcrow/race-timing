@@ -51,6 +51,7 @@ export default function Page() {
   const SetLiveRace = (race:string) =>{
     console.log("My Race", race)
     setRace(race);
+  
     
   }
 
@@ -126,7 +127,7 @@ const processSplits= () =>{
             </CardHeader>
             <CardContent>
 
-               <RaceDBSelector race={SetLiveRace}/>
+               <RaceDBSelector SetLiveRace={SetLiveRace}/>
      
             </CardContent>
           </Card>

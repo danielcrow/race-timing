@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams
         const raceid = searchParams.get('raceid')
-        const racestarttime:string = searchParams.get('racestarttime')
+        const racestarttime:any = searchParams.get('racestarttime')
         const RaceStartTime:Date = new Date(racestarttime)
         console.log(raceid)
         const db = (await clientPromise).db(DB);
@@ -50,9 +50,9 @@ export async function GET(request: NextRequest) {
                         const splitTm = splitDateTime.getTime() - RaceStartTime.getTime();
                         const dteSplitTm = new Date(splitTm)
                         
-                        let split = {};
-                        split[allRaces[idx].SplitDescription] = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
-   
+                        let split = {"name": allRaces[idx].SplitDescription, "time": dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')};
+                        //split[allRaces[idx].SplitDescription] = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
+                        //console.log("My Split", split)
                         
                         racersSplits[idv]["splits"].push(split)
                         bibfound=true;
@@ -66,8 +66,9 @@ export async function GET(request: NextRequest) {
                         const splitTm = splitDateTime.getTime() - RaceStartTime.getTime();
                         const dteSplitTm = new Date(splitTm)
                        
-                        let split = {};
-                        split[allRaces[idx].SplitDescription] = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
+                        let split = {"name": allRaces[idx].SplitDescription, "time": dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')};
+
+                        //split[allRaces[idx].SplitDescription] = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
                         //+ ":" + dteSplitTm.getMilliseconds().toLocaleString().padStart(2, '0'); 
                         
                        
@@ -81,8 +82,10 @@ export async function GET(request: NextRequest) {
                 const splitDateTime = new Date(allRaces[idx].SplitDateTime)
                         const splitTm = splitDateTime.getTime() - RaceStartTime.getTime();
                         const dteSplitTm = new Date(splitTm)
-                        let split = {};
-                        split[allRaces[idx].SplitDescription] = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
+                       
+                        let split = {"name": allRaces[idx].SplitDescription, "time": dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')};
+
+                       // split[allRaces[idx].SplitDescription] = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
         
                         //split = {allRaces[idx].SplitDescription: dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
                          //   + ":" + dteSplitTm.getMilliseconds().toLocaleString().padStart(2, '0'); }
@@ -115,7 +118,7 @@ export async function GET(request: NextRequest) {
         (await clientPromise).close
         return Response.json(obj)
     } catch (e) {
-        console.log(e)
+
         (await clientPromise).close
        return new Response("Error")
     }

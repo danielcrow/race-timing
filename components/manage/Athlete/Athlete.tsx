@@ -21,8 +21,10 @@ import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from 'next/navigation'
 
-export default function athletes(props: {id:string} ){
-    const [data, setData] = useState({})
+
+
+export default function Athlete(props: {id:string} ){
+    const [data, setData] = useState({"RaceID": "", "Notes":"", "FName":"","LName":"","BibNumber":""})
     const [isLoading, setLoading] = useState(true)
     const [raceid, setRaceId] = useState()
     const router = useRouter()
@@ -56,7 +58,7 @@ export default function athletes(props: {id:string} ){
             setData(data[0])
             setLoading(false)
           })
-      }, [props.athlete])
+      }, [props.id])
 
    
 
@@ -75,7 +77,7 @@ export default function athletes(props: {id:string} ){
 
       return    <div>
 
-<Form {...form}  onSubmit={onSubmit}>
+<Form {...form} >
     <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="ChipNumber">ChipNumber</Label>
         <Input type="text" id="ChipNumber" name="name" value={data.Notes} />

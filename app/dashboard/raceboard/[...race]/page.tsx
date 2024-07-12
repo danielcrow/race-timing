@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
-import RaceSelector from '@/components/raceselector/raceselector'
-import RaceSplits from '@/components/racesplits/racesplits'
+import RaceSelector from '@/components/RaceSelector/RaceSelector'
+import RaceSplits from '@/components/RaceSplits/RaceSplits'
 import { Button } from '@/components/ui/button'
 import { useParams } from 'next/navigation'
 export default function Page() {
 
-  const [race, setRace] = useState({})
+  const [race, setRace] = useState({RaceId:"", StartDateTime:"", RaceDescription:""})
   
   const newRace = (race:any) =>{
     console.log(race)
@@ -25,7 +25,7 @@ export default function Page() {
 
             
             <div>
-              <RaceSelector raceId={raceid} race={newRace} />
+              <RaceSelector raceId={raceid} newRace={newRace} />
             </div>
           <div>
               <RaceSplits key={race.RaceId} race={race.RaceId} startTime={race.StartDateTime} raceDescription={race.RaceDescription}  />

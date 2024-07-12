@@ -15,7 +15,7 @@ import {
 import { table } from 'console';
 
 
-export default function athletes(props: { race: string }){
+export default function Athletes(props: { race: string }){
     const [data, setData] = useState([])
     const [isLoading, setLoading] = useState(true)
     const [raceid, setRaceId] = useState()

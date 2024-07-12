@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
         return Response.json({"error":0,  "result":"success"})
     } catch (e) {
-        console.log(e)
+
         (await clientPromise).close
         return Response.json({"error":400,  "result":e})
     }

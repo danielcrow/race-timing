@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const HeaderNavLink = ({ href, children }) => {
+const HeaderNavLink = ({ href, children }:{href:string, children: React.ReactNode  }) => {
   const pathname = usePathname();
   const active = href === pathname;
     console.log(active)

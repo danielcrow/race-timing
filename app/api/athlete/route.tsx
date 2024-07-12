@@ -23,8 +23,8 @@ export async function GET(request: NextRequest) {
              query =  {  "ID": Number(id)};
         }
 
-        const racestarttime:string = searchParams.get('racestarttime')
-        const RaceStartTime:Date = new Date(racestarttime)
+        const racestarttime:any = searchParams.get('racestarttime')
+        const RaceStartTime:Date|null = new Date(racestarttime)
         console.log(raceid)
         const db = (await clientPromise).db(DB);
         //const query =  { "RaceID": Number(raceid)};
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
          (await clientPromise).close
         return Response.json(allAthletes)
     } catch (e) {
-        console.log(e)
+     
         (await clientPromise).close
        return new Response("Error")
     }

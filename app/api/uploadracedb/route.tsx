@@ -24,10 +24,10 @@ export async function GET(request: NextRequest) {
     }
 }
 
-export async function POST(req: { formData: () => any; }, res: any) {
+export async function POST(req: NextRequest, res: any) {
     console.log("Files")
     const formData = await req.formData();
-    const file = formData.get("file");
+    const file:any = formData.get("file");
     if (!file) {
         return NextResponse.json({ error: "No files received." }, { status: 400 });
     }
