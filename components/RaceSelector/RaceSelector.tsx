@@ -72,7 +72,7 @@ export default function RaceSelector({newRace = () => {}, raceId}:Props) {
     if (isLoading) return <p>Loading...</p>
     if (!races) return <p>No race data</p>
     return <div>
-      <Select onValueChange={onChange} value={selectedOption}>
+      <Select onValueChange={onChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select a Race" />
         </SelectTrigger>

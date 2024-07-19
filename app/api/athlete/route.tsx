@@ -58,7 +58,7 @@ export async function POST() {
         console.log(DB)
         console.log(collection)
         
-        const submittedDocument = await theCollection.insertMany(dummyData)
+        const submittedDocument = await theCollection.insertOne(dummyData)
         console.log(submittedDocument);
         (await clientPromise).close
 

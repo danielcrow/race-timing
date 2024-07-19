@@ -1,7 +1,9 @@
 import Link from "next/link";
 
-import Header from "@/components/Header/Header";
+import Header from "@/components/Header/HeaderAdmin";
 import Footer from "@/components/Footer/Footer";
+
+
 
 export default function DashboardLayout({
   children,

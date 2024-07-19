@@ -31,47 +31,48 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { useFormStatus, useFormState } from 'react-dom'
-import {updateAthlete} from '@/app/actions/actions'
+
+import {newAthlete} from "@/app/actions/actions"
 
 
+export default function NewAthelete(props: {race:race}){
+   
 
-export default function Athlete(props: {athlete:Athlete, raceObj:race} ){
-    const athlete = props.athlete
+ 
+    const initialState:AthleteState = { message: null,success: false };
 
-    const initialState:initialStateAthlete = { message: null,success: false, FName: "", LName: "", RaceId: "",  ChipNumber: "", BibNumber: "" };
-    
-    //const [FName, setFName] = useState(props.athlete.FirstName);
-
-    const [state, formAction] = useFormState<AthleteState, FormData>(updateAthlete, initialState);
-
+    const [state, formAction] = useFormState<AthleteState, FormData>(newAthlete, initialState);
     const [open, setOpen] = useState(false);
 
+    const FormSchema = z.object({
+        username: z.string().min(2, {
+          message: "Username must be at least 2 characters.",
+        }),
+      })
+    
+    
     useEffect(() => {
-      
+   
       if (state.success) {
-        
-        /*
-        props.athlete.FName=state.FName;
-        props.athlete.LName=state.LName;
-        props.athlete.Notes=state.BibNumber;
-        props.athlete.ChipNumber=state.ChipNumber;
-        */
+        console.log("Yey")
         setOpen(false)
-      }
-    },[state,props])
 
+      }
+    
+    },[state])
+    const form = useForm<z.infer<typeof FormSchema>>({
+        resolver: zodResolver(FormSchema),
+        defaultValues: {
+          username: "",
+        },
+      })
       return  <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <TableRow key={athlete.RaceID}>
-                    <TableCell>{athlete.Notes}</TableCell>
-                    <TableCell>{athlete.BibNumber}</TableCell>
-                    <TableCell>{athlete.FName}</TableCell>
-                    <TableCell>{athlete.LName}</TableCell>
-                </TableRow>
+              <Button variant="outline">New Athlete(Not coded)</Button>
               </DialogTrigger> 
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                  <DialogTitle>Edit Athlete</DialogTitle>
+                  <DialogTitle>New Athlete</DialogTitle>
                   <DialogDescription>
                       Make changes to your Athlete here.
                   </DialogDescription>
@@ -82,34 +83,27 @@ export default function Athlete(props: {athlete:Athlete, raceObj:race} ){
                     <Label htmlFor="name" className="text-right">
                       ChipNumber
                     </Label>
-                    <Input name="ChipNumber" defaultValue={props.athlete.BibNumber} className="col-span-3" />
+                    <Input name="ChipNumber" className="col-span-3"  />
                   </div>
                   <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="BibNumber" className="text-right">
+                    <Label htmlFor="username" className="text-right">
                       BibNumber
                     </Label>
-                    <Input name="BibNumber" defaultValue={props.athlete.Notes} className="col-span-3" />
+                    <Input name="BibNumber" className="col-span-3" />
                   </div>
                 
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="username" className="text-right">
                     First name
                   </Label>
-                  <Input name="FirstName" defaultValue={props.athlete.FName} className="col-span-3" />
+                  <Input name="FirstName" className="col-span-3" />
                 </div>
               
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="username" className="text-right">
                     Last Name
                   </Label>
-                  <Input name="LastName" defaultValue={props.athlete.LName} className="col-span-3" />
-                </div>
-         
-              <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-right">
-                    RaceId
-                  </Label>
-                  <Input name="RaceId" defaultValue={props.raceObj.RaceId} className="col-span-3"/>
+                  <Input name="LastName"  className="col-span-3" />
                 </div>
               </div>
 

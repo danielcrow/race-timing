@@ -1,7 +1,7 @@
 const Footer = () => {
     return (
       <footer>
-        <p>&copy; {new Date().getFullYear().toString()} by Ibas</p>
+        <p>&copy; {new Date().getFullYear().toString()} by Daniel Crow</p>
       </footer>
     );
   };

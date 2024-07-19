@@ -5,12 +5,12 @@ import HeaderNavLink from './HeaderNavLink';
 
 const menuItems = [
 
-
-  { label: `Race Board`, url: `/dashboard/raceresults/0` }
-
+  { label: `Race Import`, url: `/admindashboard/racesetup` },
+  { label: `Race Board`, url: `/admindashboard/raceresults/0` },
+  { label: `Race Admin`, url: `/admindashboard/chooserace/` },
 ];
 
-const Header = () => {
+const HeaderAdmin = () => {
   return (
     <header className="flex flex-col gap-5">
       <div className="py-4 flex items-center">
@@ -39,4 +39,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderAdmin;
