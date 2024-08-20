@@ -48,52 +48,33 @@ import { useFormStatus, useFormState } from 'react-dom'
 import {Result} from "@/components/RaceSplits/columns"
 import SplitResult from './SplitResult';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
+import ResultCharts from '../ResultCharts/ResultCharts'
 
 
 
 
 export default function RacerResultDetails(props: {row:any} ){
     console.log(props.row)
-    function showData(cell:any){
-      //console.log(cell.column.id);
-      if(cell.column.id == "Details"){
-        return   <CollapsibleTrigger asChild>
-                  <TableCell>
-                  <Button variant="ghost" size="sm">
-                  Split Details
-                    <CaretSortIcon className="h-4 w-4" />
-                        <span className="sr-only">Toggle</span>
-                        
-                  </Button>
-
-                  </TableCell>
     
-              </CollapsibleTrigger> 
-      }else{
-      return  <TableCell key={cell.id}>
-        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-      
-    </TableCell>
-    }
-  }
+    
+  
+  
 
     return  <Collapsible key={props.row.id} asChild>
             <>  
-                <TableRow
-                  key={props.row.id}
-                  data-state={props.row.getIsSelected() && "selected"}
-                >
+                <TableRow key={props.row.id}>
                   {props.row.getVisibleCells().map((cell:any) => (
-                   
-                    showData(cell)
+                    <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  
+                </TableCell>
                   ))}
                   
                 </TableRow>
                 
               
               <CollapsibleContent asChild>
-               
-         
+              <div>
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -116,8 +97,10 @@ export default function RacerResultDetails(props: {row:any} ){
                     </TableBody>
                   </Table>
                   
-             
+                  <ResultCharts raceId={props.row.original.RaceId} athleteId={props.row.original.FirstName + " " + props.row.original.Surname}></ResultCharts>
+                  </div>
               </CollapsibleContent>
+
               </>
             </Collapsible>
     

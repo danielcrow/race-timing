@@ -12,7 +12,8 @@ export default function SplitResult(props: any){
         return dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0') +  "." + dteSplitTm.getMilliseconds().toLocaleString().padStart(2, '0')
 
     }
-    return ( <TableRow key={props.time}>
+    return ( 
+            <TableRow key={props.time}>
             
                 <TableCell>{props.split.name}</TableCell>
                 <TableCell>{props.split.position}</TableCell>

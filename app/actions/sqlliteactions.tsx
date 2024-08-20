@@ -8,6 +8,29 @@ import sqlite3 from "sqlite3";
 
 
 
+export async function getRaceType(){
+    const sqlquery = "select RaceShortName, RaceId, RaceDescritption from Race";
+    const dbPath = path.join(process.cwd(), "public/assets/RaceTiming.db");
+    let rtnTypes: any[] = [];
+
+    const db = await open({filename: dbPath, // Specify the database file path
+        driver: sqlite3.Database, // Specify the database driver (sqlite3 in this case)
+        
+    });
+    const races = await db.all(sqlquery);
+
+    for (let race in races){
+        const raceDetails = races[race];
+        const rSName = raceDetails["RaceShortName"];
+
+        if(rSName.includes("AQ")){
+            console.log("e")
+        }
+    }
+
+    return rtnTypes
+}
+
 function getSplitOrder(raceResults: AthleteObj[],splitNumber:number){
     let splitResults = []
     for(let r in raceResults){
@@ -135,6 +158,22 @@ export async function getSplitDescriptions(raceid:string):Promise<string[]>{
 }
 
 
+function lastSunday(month: number, year: any) {
+    var d = new Date();
+    var lastDayOfMonth = new Date(Date.UTC(year || d.getFullYear(), month+1, 0));
+    var day = lastDayOfMonth.getDay();
+    return new Date(Date.UTC(lastDayOfMonth.getFullYear(), lastDayOfMonth.getMonth(), lastDayOfMonth.getDate() - day));
+  }
+  
+  function isBST(date: Date) {
+    var d = date || new Date();
+    var starts = lastSunday(2, d.getFullYear());
+    starts.setHours(1);
+    var ends = lastSunday(9, d.getFullYear());
+    ends.setHours(1);
+    return d.getTime() >= starts.getTime() && d.getTime() < ends.getTime();
+  }
+
 export async function getRaceData(raceid:string, racestarttime:string): Promise<AthleteObj[]> {
     //const query:string =  "select * from splits where RaceID=" + raceid
     let raceDetailsQuery = "select BibNumber,Laps,StartDateTime,a.ChipStartDateTime from race left join athlete a on race.ID = a.RaceID  where Race.ID='"+raceid +"'"
@@ -165,11 +204,11 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
         const raceDetail = raceDetails[0];
    
         laps = raceDetail["Laps"]
-        ChipStartTime = raceDetail["ChipStartDateTime"]
+   
       
         StartDateTime = raceDetail["StartDateTime"]
     }
-
+    console.log("Dan", ChipStartTime)
     const races = await db.all(query);
     let raceResults: AthleteObj[] = []
     let dteSplitTm: Date =new Date();
@@ -197,18 +236,25 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                 if (raceResults[r].splits.length==laps-1){
         
                     let RaceFinish:Date =new Date();
-                        if(racestarttime!=""){
+                    ChipStartTime = new Date(races[r].ChipStartDateTime)
+                        if(races[r].ChipStartDateTime== null){
+                
                             RaceFinish = new Date(StartDateTime)
                         }else{
                             RaceFinish = new Date(ChipStartTime)
                         }
+                        if(isBST(RaceFinish)){
+                            
+                            RaceFinish.setHours(RaceFinish.getHours() + 1);
+                        }
+                        //console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime)
                        // console.log("RaceFinish", RaceFinish)
                         //const splitDateTime:Date = new Date(raceResults[r].splits[laps-1]["time"]); 
                         const splitFinishTm = splitDateTime.getTime() - RaceFinish.getTime();
                         const dteSplitFinishTm = new Date(splitFinishTm)
-                        let FinishTime = dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
+                        let FinishTime = dteSplitFinishTm.getHours().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
-                        
+                        //console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
                        //const FinishTime = raceResults[r].splits[laps-1]["time"]
                     }
 
@@ -254,6 +300,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
     }
 
    // console.log(raceResults[0].splits)
+   //console.log(raceResults)
     return raceResults
 
 }

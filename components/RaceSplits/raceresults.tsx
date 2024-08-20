@@ -39,7 +39,7 @@ export function RaceResults<TData, TValue>({
     []
   )
  
-  const initialState = { hiddenColumns: ['BibNumber'] };
+  const initialState = { hiddenColumns: ['BibNumber',"ChipNumber"] };
   //const [columnVisibility, setColumnVisibility] = React.useState({"BibNumber": false})
   
   const table = useReactTable({
@@ -48,7 +48,7 @@ export function RaceResults<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-      columnVisibility: { BibNumber: false },
+      columnVisibility: { BibNumber: false,ChipNumber: false,FirstName: false,Surname: false },
     },
 
     getCoreRowModel: getCoreRowModel(),

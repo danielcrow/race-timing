@@ -52,6 +52,7 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,  
       columnFilters,
+      columnVisibility: {  RaceId: false },
     },
     initialState: {
       columnVisibility: {RaceId: false}

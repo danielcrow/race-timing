@@ -1,7 +1,9 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { CollapsibleTrigger } from "../ui/collapsible"
+import { Label } from "@radix-ui/react-label"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -15,6 +17,23 @@ export type Result = {
 }
  
 export const columns: ColumnDef<Result>[] = [
+  {
+    accessorKey: 'Name',
+    header: 'Name',
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center">
+          <CollapsibleTrigger>
+            <Button variant="ghost">
+              <ChevronDown className="h-4 w-4" />
+            </Button>
+            <Label>{row.getValue('FirstName') + " " + row.getValue('Surname')}</Label>
+            
+          </CollapsibleTrigger>
+        </div>
+      );
+  }
+  },
   {
     accessorKey: "BibNumber",
     header: "ChipNumber",
@@ -35,8 +54,11 @@ export const columns: ColumnDef<Result>[] = [
   {
     accessorKey: "ChipStartTime",
     header: "Start Time",
+    cell: ({ row }) => {
+      return (row.getValue('ChipStartTime'))
+    }
   },
-  { header: "Details"},
+  
   {
     accessorKey: "FinishTime",
     header: ({ column }) => {
