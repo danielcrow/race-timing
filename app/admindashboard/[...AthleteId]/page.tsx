@@ -11,9 +11,9 @@ import { useParams } from 'next/navigation'
 import { Button} from '@/components/ui/button'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
-import RaceList from '@/components/manage/RaceList'
+import RaceList from '@/components/manage/RaceListDB'
 import { Card, CardContent, CardHeader,CardFooter, CardTitle,CardDescription } from '@/components/ui/card'
-
+import {deleteRace} from '@/app/actions/actions'
 
 export default function Page() {
   const router = useRouter()
@@ -70,7 +70,18 @@ export default function Page() {
     //raceObj.RaceId = "1"
     setType("chooserace")
   }
+  const onDeleteClick = async (e: any) =>{
+    //raceObj = {}
+    //newRace({})
+    //raceObj.RaceId = "1"
+    console.log(raceObj.RaceId)
+    await deleteRace(raceObj.RaceId);
+    setType("chooserace")
+  }
 
+
+
+  
 const loadUx = (type:string) => {
   switch(theType) {
     case 'race':
@@ -83,6 +94,7 @@ const loadUx = (type:string) => {
                         <CardTitle>{raceObj.RaceDescription}</CardTitle>
                         <CardDescription>Please edit your athletes here.
                         <Button  variant="outline" onClick={onRtnClick}>Finished Editing</Button>
+                        <Button  variant="outline" onClick={onDeleteClick}>Delete Race</Button>
                         </CardDescription>
                       </CardHeader>
                       <CardContent>

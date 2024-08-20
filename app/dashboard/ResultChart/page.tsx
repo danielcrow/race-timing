@@ -72,7 +72,7 @@ export default  function Page() {
         }
         return rtnObj
     }
-    const RenderAthletes= (chartData)=> {
+    const RenderAthletes= (chartData: { [x: string]: { [x: string]: string } })=> {
         let amens = []
         console.log(chartData)
         chartData = sort_by_key(chartData)

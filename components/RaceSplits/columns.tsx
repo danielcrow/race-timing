@@ -6,18 +6,19 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Result = {
-  id: string
-  BibNumber: number
-  ChipNumber: number
+
+  BibNumber: string
+  ChipNumber: string
   FirstName: string
-  LastName: string
-  FinishTime: Date
+  Surname: string
+  FinishTime: string
 }
  
 export const columns: ColumnDef<Result>[] = [
   {
     accessorKey: "BibNumber",
     header: "ChipNumber",
+    enableHiding: true,
   },
   {
     accessorKey: "ChipNumber",
@@ -33,8 +34,9 @@ export const columns: ColumnDef<Result>[] = [
   },
   {
     accessorKey: "ChipStartTime",
-    header: "ChipStartTime",
+    header: "Start Time",
   },
+  { header: "Details"},
   {
     accessorKey: "FinishTime",
     header: ({ column }) => {

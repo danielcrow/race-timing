@@ -1,12 +1,12 @@
 import { Result, columns } from "@/components/RaceSplits/columns"
 import { RaceResults } from "@/components/RaceSplits/raceresults"
 import clientPromise from "@/app/api/database"
-import {getRaceData} from "@/app/actions/liveraceactions"
+import {getRaceData} from "@/app/actions/sqlliteactions"
 import { usePathname } from 'next/navigation'
 import { Button} from '@/components/ui/button'
 import Link from 'next/link';
 import { Label } from "@/components/ui/label"
-import RaceList from "@/components/RaceList/RaceList"
+import RaceListDB from "@/components/RaceListDB/RaceListDB"
 export const revalidate = 0
 export default async function Page(pageParams:PageProps) {
 
@@ -16,7 +16,7 @@ export default async function Page(pageParams:PageProps) {
     if(raceP.race=="0"){
     return (<div>
                 <div>
-                    <RaceList></RaceList>
+                    <RaceListDB></RaceListDB>
                    
                 </div>
             </div>

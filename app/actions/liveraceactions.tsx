@@ -31,6 +31,9 @@ export async function getRaces(): Promise<Race[]> {
     }
 }
 
+
+
+
 export async function getRaceData(raceid:string, racestarttime:string): Promise<Result[]> {
     // Fetch data from your API here.
     const db = (await clientPromise).db(DB);

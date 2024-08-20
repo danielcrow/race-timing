@@ -57,6 +57,8 @@ export function DataTable<TData, TValue>({
       columnVisibility: {RaceId: false}
 
     }
+      
+    
   })
 
   return (<div>

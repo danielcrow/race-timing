@@ -40,6 +40,12 @@ type initialStateAthlete = {
       BibNumber:  string;
   }
   
+  interface splitResults {
+      bibNumber:string;
+      splitName:string, 
+      splitTime:string;
+      ActualCumulativeTime:numnber;
+  }
 
     interface AthleteObj {
       RaceId: string;
@@ -55,6 +61,13 @@ type initialStateAthlete = {
     interface Splits{
       name: string;
       time: string;
+      position: number;
+      actualTime: number;
+      AverageActualTime: number;
+      AverageTime: string;
+      ActualCumulativeTime: number;
+      CumulativeTime: string;
+      CumumlativeSplitPosition: number;
     }
     interface race {
       RaceId: string;

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import HeaderNavLink from './HeaderNavLink';
-
+import banner from '@/app/banner.png'
 
 const menuItems = [
 
@@ -16,10 +16,10 @@ const Header = () => {
       <div className="py-4 flex items-center">
         <Link href="/">
           <Image
-            width={36}
-            height={36}
-            src="/favicon.ico"
-            className="w-8 md:w-9"
+            width={200}
+            height={200}
+            src={banner}
+            
             alt="logo"
           />
         </Link>

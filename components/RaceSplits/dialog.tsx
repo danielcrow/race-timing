@@ -12,7 +12,7 @@ import {
   } from "@/components/ui/table"
   import { useForm } from "react-hook-form"
   import { Card, CardContent, CardHeader, CardTitle,CardDescription } from '@/components/ui/card'
-
+  import { CaretSortIcon, FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons'
   import Link from 'next/link';
   import {
     ColumnDef,
@@ -41,78 +41,78 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+
+import { ScrollArea } from "@/components/ui/scroll-area"
+
 import { useFormStatus, useFormState } from 'react-dom'
 import {Result} from "@/components/RaceSplits/columns"
+import SplitResult from './SplitResult';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
+
 
 
 
 export default function RacerResult(props: {row:any} ){
+    console.log(props.row)
+    function showData(cell:any){
+      //console.log(cell.column.id);
+      if(cell.column.id == "Details"){
+        return   <CollapsibleTrigger asChild>
+                  <TableCell>
+                  <Button variant="ghost" size="sm">
+                  Split Details
+                    <CaretSortIcon className="h-4 w-4" />
+                        <span className="sr-only">Toggle</span>
+                        
+                  </Button>
 
-    return  <Dialog>
-              <DialogTrigger asChild>
+                  </TableCell>
+    
+              </CollapsibleTrigger> 
+      }else{
+      return  <TableCell key={cell.id}>
+        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+      
+    </TableCell>
+    }
+  }
+
+    return  <Collapsible key={props.row.id} asChild>
+            <>  
                 <TableRow
                   key={props.row.id}
                   data-state={props.row.getIsSelected() && "selected"}
                 >
                   {props.row.getVisibleCells().map((cell:any) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+                   
+                    showData(cell)
                   ))}
-                </TableRow>
-              </DialogTrigger> 
-              
-              <DialogContent className="max-w-screen h-screen">
-                <DialogHeader>
-                  <DialogTitle>Athlete Result</DialogTitle>
-                  <DialogDescription>
-                      Your Result Details
-                  </DialogDescription>
-                </DialogHeader>
-                <Card>
-      <CardHeader>
-        <CardTitle>{props.row.original.FirstName + " " + props.row.original.Surname}</CardTitle>
-        <CardDescription>Bib Number : {props.row.original.BibNumber}</CardDescription>
-      </CardHeader>
-      <CardContent>
-          <h4 className="text-sm font-semibold">Finish time</h4>
-          <p className="text-sm">
-              Congratulations you finished the race in {props.row.original.FinishTime}
-            </p>
-                    
-                  <div>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                      {props.row.original.splits.map((split:any) => (
-                      <TableHead key={split.name }>{split.name }</TableHead>
-                      
-                      ))}
-                       
-                      </TableRow>
-                    </TableHeader><TableBody>
-                    <TableRow>
-                    {props.row.original.splits.map((split:any) => (
-                      
-                        <TableCell key={split.time}>{split.time}</TableCell>
-                    
                   
-                ))}
                 </TableRow>
-                      </TableBody></Table>
-                </div>
-                </CardContent>
-                </Card>
-               
+                
+              
+              <CollapsibleContent asChild>
+                <Card className="w-full max-w-screen  rounded-lg overflow-hidden shadow-lg">
+                  <CardHeader>
+                    <CardTitle>{props.row.original.FirstName + " " + props.row.original.Surname}</CardTitle>
+                    <CardDescription>Bib Number : {props.row.original.BibNumber}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-6 h-screen overflow-auto">
 
-        <DialogFooter>
-        <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-
-      </DialogContent>
-      </Dialog>
+                    <h4 className="text-sm font-semibold">Finish time</h4>
+                    <p className="text-sm">
+                        Congratulations you finished the race in {props.row.original.FinishTime}
+                    </p>
+                      <div>
+                          {props.row.original.splits.map((split:any) => (
+                            <SplitResult time={split.time} name={split.name} position={split.position} avgTime={split.AverageTime} splitName='Hello' cumTime={split.ActualCumulativeTime} cumPos={split.CumumlativeSplitPosition}></SplitResult>
+                        
+                          ))}
+                      </div>    
+                    </CardContent>
+                  </Card>
+              </CollapsibleContent>
+              </>
+            </Collapsible>
+    
 }

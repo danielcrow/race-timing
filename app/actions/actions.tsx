@@ -54,6 +54,32 @@ export async function newAthlete(prevState: AthleteState, formData: FormData) {
     return {message: 'A message from the server action, yay!' ,success:true,}
 }
 
+export async function deleteRace(raceId: string) {
+    // ...
+    try{
+
+        const db = (await clientPromise).db(DB)
+        const filter = { "RaceId": Number(raceId) };
+        const collection: string  = "RaceSplits"
+        const athletes: string  = "Athletes"
+        const racesCollection: string = "races"
+        
+        const raceSplitsCollection = await db.collection(collection)
+
+        const athletesCollection = await db.collection(athletes)
+        const raceCollection = await db.collection(racesCollection)
+        
+      
+        const result = await raceSplitsCollection.deleteMany(filter);
+        const result2 = await athletesCollection.deleteMany(filter);
+        const result3 = await raceCollection.deleteMany(filter);
+        return {message: 'A message from the server action, yay!' ,success:true,}
+
+    }catch(e){
+        return {message: "It went wrong" ,success:false}
+    }
+}
+
   export async function updateRace(prevState: AthleteState, formData: FormData) {
     // ...
     try{
