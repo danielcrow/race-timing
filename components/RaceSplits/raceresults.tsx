@@ -39,19 +39,25 @@ export function RaceResults<TData, TValue>({
     []
   )
  
+  const initialState = { hiddenColumns: ['BibNumber'] };
+  //const [columnVisibility, setColumnVisibility] = React.useState({"BibNumber": false})
+  
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility: { BibNumber: false },
+    },
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      sorting,
-      columnFilters,
-    },
+    
   })
 
   return (<div>
@@ -121,3 +127,7 @@ export function RaceResults<TData, TValue>({
       </div>
   )
 }
+function setColumnVisibility(updaterOrValue: Updater<VisibilityState>): void {
+  throw new Error("Function not implemented.")
+}
+

@@ -93,28 +93,29 @@ export default function RacerResultDetails(props: {row:any} ){
               
               <CollapsibleContent asChild>
                
-                  <div>
+         
                   <Table>
                     <TableHeader>
                       <TableRow>
-                      {props.row.original.splits.map((split:any) => (
-                      <TableHead key={split.name }>{split.name }</TableHead>
-                      
-                      ))}
-                       
+                        <TableCell>Split</TableCell>
+                        <TableCell>Split Position</TableCell>
+                        <TableCell>Split Time</TableCell>
+                        <TableCell>Avg Split Time</TableCell>
+                        <TableCell>Cumulative Split Time</TableCell>
+                        <TableCell>Cumulative Position</TableCell>
                       </TableRow>
                     </TableHeader>
-                    <TableBody>
-                      <TableRow>
+                    <TableBody>    
                         {props.row.original.splits.map((split:any) => (
-                          <TableCell key={split.time}>         
-                            <SplitResult time={split.time} name={split.name} position={split.position} avgTime={split.AverageTime} splitName='Hello' cumTime={split.ActualCumulativeTime} cumPos={split.CumumlativeSplitPosition}></SplitResult>
-                          </TableCell>
+                  
+                            <SplitResult split={split}></SplitResult>
+                       
+                         
                         ))}
-                      </TableRow>
+                   
                     </TableBody>
                   </Table>
-                      </div>    
+                  
              
               </CollapsibleContent>
               </>
