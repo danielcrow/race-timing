@@ -253,7 +253,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                         const splitFinishTm = splitDateTime.getTime() - RaceFinish.getTime();
                         const dteSplitFinishTm = new Date(splitFinishTm)
                  
-                        let FinishTimeActual = splitFinishTm
+                        let FinishTimeActual = dteSplitFinishTm.getTime();
                         let FinishTime = dteSplitFinishTm.getUTCHours().toString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
                         raceResults[r].FinishTimeActual = FinishTimeActual;
