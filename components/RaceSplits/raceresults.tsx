@@ -48,7 +48,7 @@ export function RaceResults<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-      columnVisibility: { BibNumber: false,ChipNumber: false,FirstName: false,Surname: false },
+      columnVisibility: { BibNumber: false,ChipNumber: false,FirstName: false,Surname: false,FinishTimeActual:false },
     },
 
     getCoreRowModel: getCoreRowModel(),

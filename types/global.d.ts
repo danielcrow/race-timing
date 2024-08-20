@@ -53,6 +53,7 @@ type initialStateAthlete = {
       ChipStartTime: string;
       splits: Splits[]
       FinishTime: string;
+      FinishTimeActual: number;
     }
     
     interface Splits{

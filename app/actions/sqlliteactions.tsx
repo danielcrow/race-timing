@@ -253,9 +253,10 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                         const splitFinishTm = splitDateTime.getTime() - RaceFinish.getTime();
                         const dteSplitFinishTm = new Date(splitFinishTm)
                  
-                        
+                        let FinishTimeActual = splitFinishTm
                         let FinishTime = dteSplitFinishTm.getUTCHours().toString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
+                        raceResults[r].FinishTimeActual = FinishTimeActual;
                         console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
                        //const FinishTime = raceResults[r].splits[laps-1]["time"]
                     }
@@ -266,7 +267,10 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
             }
         }
         if(found!=true){
-            let athlete:AthleteObj = {RaceId: raceid, BibNumber: races[race].Bib, ChipNumber: races[race].Bib,ChipStartTime: races[race].SplitDateTime,FirstName: races[race].FName, Surname: races[race].LName, FinishTime: "88888",splits: [split]}
+            let athlete:AthleteObj = {
+                RaceId: raceid, BibNumber: races[race].Bib, ChipNumber: races[race].Bib, ChipStartTime: races[race].SplitDateTime, FirstName: races[race].FName, Surname: races[race].LName, FinishTime: "88888", splits: [split],
+                FinishTimeActual: 0
+            }
             raceResults.push(athlete)
         }
        

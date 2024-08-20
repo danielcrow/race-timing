@@ -16,6 +16,12 @@ export type Result = {
   FinishTime: string
 }
  
+function formatDate(actualTime:number){
+  const dteSplitTm = new Date(actualTime);
+  return (dteSplitTm.getHours()-1).toString().padStart(2, '0') + ":" + dteSplitTm.getMinutes().toString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0') +  "." + dteSplitTm.getMilliseconds().toLocaleString().padStart(2, '0')
+
+}
+
 export const columns: ColumnDef<Result>[] = [
   {
     accessorKey: 'Name',
@@ -46,6 +52,10 @@ export const columns: ColumnDef<Result>[] = [
   {
     accessorKey: "FirstName",
     header: "FirstName",
+  },
+  {
+    accessorKey: "FinishTimeActual",
+    header: "FinishTimeActual",
   },
   {
     accessorKey: "Surname",
@@ -80,7 +90,8 @@ export const columns: ColumnDef<Result>[] = [
           return "DNS"
         }
         else{
-          return row.getValue("FinishTime")
+          console.log(row.getValue("FinishTimeActual"))
+          return formatDate(row.getValue("FinishTimeActual"))
         }
       }
   },
