@@ -46,18 +46,20 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
     for(let ida in allAthletes){
         let athleteObj:AthleteObj = {"RaceId":"", "FirstName":"", "FinishTime":"","Surname":"","BibNumber":"","ChipNumber":"", "ChipStartTime":"","splits":[] };
         //const athlete:Athlete = allAthletes[ida]
-        athleteObj["RaceId"] = allAthletes[ida]["RaceID"]
-        athleteObj["FirstName"] = allAthletes[ida]["FName"]
-        athleteObj["Surname"] = allAthletes[ida]["LName"]
-        athleteObj['BibNumber'] = allAthletes[ida]["Notes"]
-        athleteObj['ChipNumber'] = allAthletes[ida]["BibNumber"]
-        if( allAthletes[ida]["ChipStartDateTime"]== null){
-            athleteObj['ChipStartTime'] ="N/A"
-        }else{
-            athleteObj['ChipStartTime'] =allAthletes[ida]["ChipStartDateTime"]
+        if(allAthletes[ida]["RaceID"]!=undefined){
+            athleteObj["RaceId"] = allAthletes[ida]["RaceID"]
+            athleteObj["FirstName"] = allAthletes[ida]["FName"]
+            athleteObj["Surname"] = allAthletes[ida]["LName"]
+            athleteObj['BibNumber'] = allAthletes[ida]["Notes"]
+            athleteObj['ChipNumber'] = allAthletes[ida]["BibNumber"]
+            if( allAthletes[ida]["ChipStartDateTime"]== null){
+                athleteObj['ChipStartTime'] ="N/A"
+            }else{
+                athleteObj['ChipStartTime'] =allAthletes[ida]["ChipStartDateTime"]
+            }
+            athleteObj["splits"] = []
+            rtnObject.push(athleteObj)
         }
-        athleteObj["splits"] = []
-        rtnObject.push(athleteObj)
     }
     
     const allRaces = await racesplits.find(query).sort({SplitDateTime: 1}).toArray();
@@ -101,7 +103,10 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
 
                 
                 rtnObject[idv]["FinishTime"] =FinishTime;
-                rtnObject[idv]["splits"].push(split)
+                console.log("Danny", rtnObject[idv])
+                if(rtnObject[idv].splits!=undefined){
+                    rtnObject[idv].splits.push(split);
+                }
             }
         }
     }
