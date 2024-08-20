@@ -50,7 +50,7 @@ export function RaceResults<TData, TValue>({
       columnFilters,
       columnVisibility: { BibNumber: false },
     },
-    onColumnVisibilityChange: setColumnVisibility,
+
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -127,7 +127,5 @@ export function RaceResults<TData, TValue>({
       </div>
   )
 }
-function setColumnVisibility(updaterOrValue: Updater<VisibilityState>): void {
-  throw new Error("Function not implemented.")
-}
+
 

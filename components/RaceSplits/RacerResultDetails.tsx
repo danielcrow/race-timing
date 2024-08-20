@@ -108,7 +108,7 @@ export default function RacerResultDetails(props: {row:any} ){
                     <TableBody>    
                         {props.row.original.splits.map((split:any) => (
                   
-                            <SplitResult split={split}></SplitResult>
+                            <SplitResult key={split.id} split={split}></SplitResult>
                        
                          
                         ))}

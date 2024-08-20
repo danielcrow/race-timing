@@ -1,6 +1,5 @@
 import { Result, columns } from "@/components/RaceSplits/columns"
 import { RaceResults } from "@/components/RaceSplits/raceresults"
-import clientPromise from "@/app/api/database"
 import {getRaceData} from "@/app/actions/sqlliteactions"
 import { usePathname } from 'next/navigation'
 import { Button} from '@/components/ui/button'

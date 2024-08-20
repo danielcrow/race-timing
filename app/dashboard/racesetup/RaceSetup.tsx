@@ -31,7 +31,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import RaceDBSelector from '@/components/racedatabase/RaceDBSelector/RaceDBSelector'
-import RaceAthletes from '@/components/RaceAthletes/RaceAthletes'
+
 interface IProps_Square {
   message: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -156,7 +156,7 @@ const processSplits= () =>{
              
             </CardHeader>
             <CardContent>
-           <RaceAthletes race={race}></RaceAthletes>
+   
             </CardContent>
           </Card>
           <Card x-chunk="dashboard-01-chunk-5">
