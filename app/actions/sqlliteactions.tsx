@@ -215,8 +215,8 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
     for(let race in races){
         
         let found = false;
-        const splitDateTime = new Date(races[race].SplitDateTime)
-        const prevSplitTime = new Date (races[race].PreviousSplitDateTime)
+        const splitDateTime = new Date(races[race].SplitDateTime + " GMT")
+        const prevSplitTime = new Date (races[race].PreviousSplitDateTime + " GMT")
         //const ChipStartTime = new Date (races[race].chip)
         const splitTm = splitDateTime.getTime() - prevSplitTime.getTime();
         dteSplitTm = new Date(splitTm)
@@ -239,9 +239,9 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                     ChipStartTime = new Date(races[r].ChipStartDateTime)
                         if(races[r].ChipStartDateTime== null){
                 
-                            RaceFinish = new Date(StartDateTime)
+                            RaceFinish = new Date(StartDateTime + " GMT")
                         }else{
-                            RaceFinish = new Date(ChipStartTime)
+                            RaceFinish = new Date(ChipStartTime + " GMT")
                         }
                         if(isBST(RaceFinish)){
                             

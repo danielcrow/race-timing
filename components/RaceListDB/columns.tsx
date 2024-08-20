@@ -42,7 +42,7 @@ export const columns: ColumnDef<race>[] = [
       },
       cell: ({ row }) => {
      
-        return <Link href={"./"+row.getValue("RaceId")+ "/" + row.getValue("StartDateTime")}>{row.getValue("StartDateTime")}</Link>
+        return <Link href={"./"+row.getValue("RaceId")+ "/" + row.getValue("StartDateTime")}>{new Date(row.getValue("StartDateTime") + " GMT").toDateString()}</Link>
       }
   },
 ]
