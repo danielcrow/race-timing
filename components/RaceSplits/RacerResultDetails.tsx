@@ -52,7 +52,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/colla
 
 
 
-export default function RacerResult(props: {row:any} ){
+export default function RacerResultDetails(props: {row:any} ){
     console.log(props.row)
     function showData(cell:any){
       //console.log(cell.column.id);
@@ -92,25 +92,30 @@ export default function RacerResult(props: {row:any} ){
                 
               
               <CollapsibleContent asChild>
-                <Card className="w-full max-w-screen  rounded-lg overflow-hidden shadow-lg">
-                  <CardHeader>
-                    <CardTitle>{props.row.original.FirstName + " " + props.row.original.Surname}</CardTitle>
-                    <CardDescription>Bib Number : {props.row.original.BibNumber}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-6 h-screen overflow-auto">
-
-                    <h4 className="text-sm font-semibold">Finish time</h4>
-                    <p className="text-sm">
-                        Congratulations you finished the race in {props.row.original.FinishTime}
-                    </p>
-                      <div>
-                          {props.row.original.splits.map((split:any) => (
+               
+                  <div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                      {props.row.original.splits.map((split:any) => (
+                      <TableHead key={split.name }>{split.name }</TableHead>
+                      
+                      ))}
+                       
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        {props.row.original.splits.map((split:any) => (
+                          <TableCell key={split.time}>         
                             <SplitResult time={split.time} name={split.name} position={split.position} avgTime={split.AverageTime} splitName='Hello' cumTime={split.ActualCumulativeTime} cumPos={split.CumumlativeSplitPosition}></SplitResult>
-                        
-                          ))}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableBody>
+                  </Table>
                       </div>    
-                    </CardContent>
-                  </Card>
+             
               </CollapsibleContent>
               </>
             </Collapsible>

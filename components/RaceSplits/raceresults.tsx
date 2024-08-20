@@ -13,7 +13,7 @@ import {
 } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import RacerResult from "@/components/RaceSplits/dialog"
+import RacerResultDetails from "@/components/RaceSplits/RacerResultDetails"
 import {
   Table,
   TableBody,
@@ -88,7 +88,7 @@ export function RaceResults<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <RacerResult key={row.id} row={row}></RacerResult>
+              <RacerResultDetails key={row.id} row={row}></RacerResultDetails>
             ))
           ) : (
             <TableRow>

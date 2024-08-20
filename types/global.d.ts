@@ -9,10 +9,7 @@ declare global {
 }
 
 declare global {
-    interface race {
-      RaceId: string
-
-    }
+    
     interface Athlete {
       RaceID: string;
       Notes: string;

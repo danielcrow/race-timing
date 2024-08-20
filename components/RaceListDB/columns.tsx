@@ -11,7 +11,7 @@ export type Race = {
   StartDateTime: string
 }
  
-export const columns: ColumnDef<Race>[] = [
+export const columns: ColumnDef<race>[] = [
   {
     accessorKey: "RaceId",
     header: "RaceId",

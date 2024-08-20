@@ -1,7 +1,7 @@
 'use client'
 import {getRaceData} from '@/app/actions/sqlliteactions'
 
-import {Race} from "@/components/RaceList/columns"
+import {Race} from "@/components/RaceListDB/columns"
 import RaceListDB from '@/components/RaceListDB/RaceListDB'
 import { useState, useEffect } from 'react'
 
@@ -10,13 +10,13 @@ export default function Page() {
 
     useEffect(() => {
         const updateRaces = async () => {
-          const d:Race[] = await getRaceData("74","");
+          const d:AthleteObj[] = await getRaceData("74","");
           console.log(d)
           setRaces(d);
           
         };
         updateRaces();
-        console.log(races);
+       
       }, []);
 
 

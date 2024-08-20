@@ -1,10 +1,12 @@
-import { Race, columns } from "@/components/RaceList/columns"
-import { DataTable } from "@/components/RaceList/data-table"
+import { Race, columns } from "@/components/RaceListDB/columns"
+import { DataTable } from "@/components/RaceListDB/data-table"
 import {getRaces} from "@/app/actions/sqlliteactions"
+
  
 export default async function RaceListDB() {
     
-    const data = await getRaces()
+    const data:race[] = await getRaces()
+
    
     return (<div>
             <div>

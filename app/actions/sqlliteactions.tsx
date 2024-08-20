@@ -5,7 +5,7 @@ import {Race} from "@/components/RaceListDB/columns"
 import {Result} from "@/components/RaceSplits/columns"
 import path from "path";
 import sqlite3 from "sqlite3";
-import Athlete from "@/components/manage/Athlete/Athlete";
+
 
 
 function getSplitOrder(raceResults: AthleteObj[],splitNumber:number){
@@ -187,7 +187,8 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
             AverageActualTime: 0,
             AverageTime: "",
             ActualCumulativeTime: 0,
-            CumulativeTime: ""
+            CumulativeTime: "",
+            CumumlativeSplitPosition: 0
         }
        
         for (let r in raceResults){
@@ -258,8 +259,8 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
 }
 
 
-export async function getRaces(): Promise<Race[]> {
-    let racesToReturn:Race[] = [];
+export async function getRaces(): Promise<race[]> {
+    let racesToReturn:race[] = [];
     try{
         const query:string =  "select * from race"
         const dbPath = path.join(process.cwd(), "public/assets/RaceTiming.db");
@@ -273,7 +274,7 @@ export async function getRaces(): Promise<Race[]> {
         for(let idx in races){
             const race = races[idx];
             if(race.FinishDateTime != null){
-                let raceToAdd:Race = {RaceId: race.ID, RaceDescription: race.RaceName, StartDateTime: String(new Date(race.StartDateTime))}
+                let raceToAdd:race = {RaceId: race.ID, RaceDescription: race.RaceName, StartDateTime: String(new Date(race.StartDateTime))}
                 racesToReturn.push(raceToAdd);
             }
         }

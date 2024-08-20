@@ -12,14 +12,24 @@ export default function SplitResult(props: {time:string, name:string, position:n
     }
 
     return (<div>
+        <Card>
+        <CardHeader>
+        <CardTitle>
+        {props.name}
+              </CardTitle>  
+          <CardDescription className="max-w-lg text-balance leading-relaxed">
+          Split Position {props.position}
+          </CardDescription>
+        </CardHeader>
+        <CardFooter>
             <ol>
-                <li>Split Position {props.position}</li>
                 <li>Your Split Time : {props.time}</li>
                 <li>Average Split Time : {props.avgTime}</li>
                 <li>Cumulative Split Time : {formatDate(props.cumTime)}</li>
                 <li>Cumulative Position : {props.cumPos}</li>
             </ol>
-
+        </CardFooter>
+      </Card>
     </div>
 )
 }
