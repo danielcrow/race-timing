@@ -19,7 +19,7 @@ const nextConfig = {
         return [
           {
             source: "/",
-            destination: "/dashboard/raceboard/0",
+            destination: "/dashboard/raceresults/0",
             permanent: true,
           },
         ];
