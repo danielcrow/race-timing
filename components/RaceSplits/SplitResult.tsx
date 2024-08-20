@@ -9,7 +9,7 @@ export default function SplitResult(props: any){
     
     function formatDate(actualTime:number){
         const dteSplitTm = new Date(actualTime);
-        return (dteSplitTm.getHours()-1).toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0') +  "." + dteSplitTm.getMilliseconds().toLocaleString().padStart(2, '0')
+        return (dteSplitTm.getHours()-1).toString().padStart(2, '0') + ":" + dteSplitTm.getMinutes().toString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0') +  "." + dteSplitTm.getMilliseconds().toLocaleString().padStart(2, '0')
 
     }
     return ( 

@@ -220,7 +220,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
         //const ChipStartTime = new Date (races[race].chip)
         const splitTm = splitDateTime.getTime() - prevSplitTime.getTime();
         dteSplitTm = new Date(splitTm + " GMT")
-        let FinishTime = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
+        let FinishTime = dteSplitTm.getMinutes().toString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
         let split:Splits = {
             name: races[race].SplitDescription, time: FinishTime, position: 0, actualTime: splitTm,
             AverageActualTime: 0,
@@ -252,7 +252,9 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                         //const splitDateTime:Date = new Date(raceResults[r].splits[laps-1]["time"]); 
                         const splitFinishTm = splitDateTime.getTime() - RaceFinish.getTime();
                         const dteSplitFinishTm = new Date(splitFinishTm)
-                        let FinishTime = dteSplitFinishTm.getHours().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
+                 
+                        
+                        let FinishTime = dteSplitFinishTm.getHours().toString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
                         console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
                        //const FinishTime = raceResults[r].splits[laps-1]["time"]
