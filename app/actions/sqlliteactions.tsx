@@ -219,7 +219,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
         const prevSplitTime = new Date (races[race].PreviousSplitDateTime + " GMT")
         //const ChipStartTime = new Date (races[race].chip)
         const splitTm = splitDateTime.getTime() - prevSplitTime.getTime();
-        dteSplitTm = new Date(splitTm)
+        dteSplitTm = new Date(splitTm + " GMT")
         let FinishTime = dteSplitTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
         let split:Splits = {
             name: races[race].SplitDescription, time: FinishTime, position: 0, actualTime: splitTm,
