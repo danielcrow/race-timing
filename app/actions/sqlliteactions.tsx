@@ -208,7 +208,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
       
         StartDateTime = raceDetail["StartDateTime"]
     }
-    console.log("Dan", ChipStartTime)
+ 
     const races = await db.all(query);
     let raceResults: AthleteObj[] = []
     let dteSplitTm: Date =new Date();
@@ -247,14 +247,14 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                             
                             RaceFinish.setHours(RaceFinish.getHours() + 1);
                         }
-                        //console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime)
+                        console.log("RaceFinish before calcs" , RaceFinish, racestarttime, ChipStartTime)
                        // console.log("RaceFinish", RaceFinish)
                         //const splitDateTime:Date = new Date(raceResults[r].splits[laps-1]["time"]); 
                         const splitFinishTm = splitDateTime.getTime() - RaceFinish.getTime();
                         const dteSplitFinishTm = new Date(splitFinishTm)
                         let FinishTime = dteSplitFinishTm.getHours().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
-                        //console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
+                        console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
                        //const FinishTime = raceResults[r].splits[laps-1]["time"]
                     }
 
