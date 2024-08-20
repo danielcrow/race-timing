@@ -215,11 +215,11 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
     for(let race in races){
         
         let found = false;
-        const splitDateTime = new Date(races[race].SplitDateTime + " GMT")
-        const prevSplitTime = new Date (races[race].PreviousSplitDateTime + " GMT")
+        const splitDateTime = new Date(races[race].SplitDateTime )
+        const prevSplitTime = new Date (races[race].PreviousSplitDateTime )
         //const ChipStartTime = new Date (races[race].chip)
         const splitTm = splitDateTime.getTime() - prevSplitTime.getTime();
-        dteSplitTm = new Date(splitTm + " GMT")
+        dteSplitTm = new Date(splitTm )
         let FinishTime = dteSplitTm.getMinutes().toString().padStart(2, '0') + ":" + dteSplitTm.getSeconds().toLocaleString().padStart(2, '0')
         let split:Splits = {
             name: races[race].SplitDescription, time: FinishTime, position: 0, actualTime: splitTm,
@@ -239,13 +239,13 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                     ChipStartTime = new Date(races[r].ChipStartDateTime)
                         if(races[r].ChipStartDateTime== null){
                 
-                            RaceFinish = new Date(StartDateTime + " GMT")
+                            RaceFinish = new Date(StartDateTime )
                         }else{
-                            RaceFinish = new Date(ChipStartTime + " GMT")
+                            RaceFinish = new Date(ChipStartTime )
                         }
                         if(isBST(RaceFinish)){
                             
-                            RaceFinish.setHours(RaceFinish.getHours() + 1);
+                            RaceFinish.setHours(RaceFinish.getUTCHours() + 1);
                         }
                         console.log("RaceFinish before calcs" , RaceFinish, racestarttime, ChipStartTime)
                        // console.log("RaceFinish", RaceFinish)
@@ -254,7 +254,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                         const dteSplitFinishTm = new Date(splitFinishTm)
                  
                         
-                        let FinishTime = dteSplitFinishTm.getHours().toString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
+                        let FinishTime = dteSplitFinishTm.getUTCHours().toString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
                         console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
                        //const FinishTime = raceResults[r].splits[laps-1]["time"]
