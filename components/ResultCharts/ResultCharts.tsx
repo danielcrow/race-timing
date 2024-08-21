@@ -26,7 +26,7 @@ export default function ResultCharts(props: {raceId:string, athleteId:string }){
         const getJobs = async () => {
         console.log("hello World")
         const lapDescription:string[] = await getSplitDescriptions(props.raceId);
-        
+        console.log("ld",lapDescription)
 
 
         const raceData =  await getRaceData(props.raceId,"asdas");

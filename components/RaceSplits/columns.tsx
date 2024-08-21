@@ -95,4 +95,16 @@ export const columns: ColumnDef<Result>[] = [
         }
       }
   },
+  {
+
+    header: "Actions",
+    accessorKey: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const racer = row.original
+      return (
+        <Button>See Details</Button>
+      )
+    }
+  }
 ]

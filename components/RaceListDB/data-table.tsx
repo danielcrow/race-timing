@@ -24,6 +24,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select"
+import { Label } from "../ui/label"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -64,14 +66,23 @@ export function DataTable<TData, TValue>({
 
   return (<div>
      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter by RaceDescription..."
-          value={(table.getColumn("RaceDescription")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("RaceDescription")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+     <Select name="eventType"  onValueChange={(event) =>
+            table.getColumn("RaceShortName")?.setFilterValue(event)
+          }>
+                <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select A Race Type" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                    <SelectLabel>Race Types</SelectLabel>
+                    <SelectItem value="DR">Duathlon</SelectItem>
+                    <SelectItem value="AQ">Aquathalon</SelectItem>
+                    <SelectItem value="TT">TT</SelectItem>
+                    <SelectItem value="WLC">WLC</SelectItem>
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+       
       </div>
     <div className="rounded-md border">
       <Table>

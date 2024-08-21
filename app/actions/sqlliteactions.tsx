@@ -142,7 +142,7 @@ function getSplitAverage(athlete:AthleteObj, raceResults: AthleteObj[],splitNumb
 
 
 export async function getSplitDescriptions(raceid:string):Promise<string[]>{
-    const sqlquery = "select * from SplitDescription sd  where RaceID ="+ raceid
+    const sqlquery = "select * from SplitDescription sd  where RaceID ="+ raceid + " order by OrderID"
     const dbPath = path.join(process.cwd(), "public/assets/RaceTiming.db");
 
 
@@ -154,6 +154,8 @@ export async function getSplitDescriptions(raceid:string):Promise<string[]>{
     for(let r in raceLaps){
         labels.push(raceLaps[r].Description);
     }
+
+    console.log("D",labels)
     return labels;
 }
 
@@ -225,7 +227,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
             name: races[race].SplitDescription, time: FinishTime, position: 0, actualTime: splitTm,
             AverageActualTime: 0,
             AverageTime: "",
-            ActualCumulativeTime: 0,
+            ActualCumulativeTime: splitTm,
             CumulativeTime: "",
             CumumlativeSplitPosition: 0
         }
@@ -257,7 +259,7 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
                         let FinishTime = dteSplitFinishTm.getUTCHours().toString().padStart(2, '0') + ":" + dteSplitFinishTm.getMinutes().toLocaleString().padStart(2, '0') + ":" + dteSplitFinishTm.getSeconds().toLocaleString().padStart(2, '0')
                         raceResults[r].FinishTime = FinishTime;
                         raceResults[r].FinishTimeActual = FinishTimeActual;
-                        console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
+                        //console.log("RaceFinish" , RaceFinish, racestarttime, ChipStartTime, FinishTime, splitDateTime,splitFinishTm)
                        //const FinishTime = raceResults[r].splits[laps-1]["time"]
                     }
 
@@ -281,9 +283,14 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
         
         const raceResult = raceResults[r];
         //console.log(raceResult.splits.length,laps)
+        console.log("Checlk for laps",raceResult.splits.length)
         if(raceResult.splits.length==1){
+            
             FinishTime = raceResult.splits[0].time
+            console.log("Testing", FinishTime)
             raceResults[r].FinishTime = FinishTime;
+            console.log("testing cum time",raceResult.splits[0].ActualCumulativeTime)
+            raceResults[r].FinishTimeActual =  Number(raceResult.splits[0].ActualCumulativeTime);
         }
         
         if(raceResult.splits.length<laps){
@@ -311,6 +318,30 @@ export async function getRaceData(raceid:string, racestarttime:string): Promise<
 
 }
 
+export async function GetAwards(raceid:string): Promise<any[]> {
+    let sql = "select dr.DivisionID,dr.RaceID,at2.Description atDescription, dr.FinishTime , dr.IsHighestDivision,d.Description,a.AthleteType  ,a.FName,a.LName ,dr.OverallPlace, dr.Place  "
+    sql += "from DivisionResults dr "
+    sql+= "left join Athlete a  on dr.AthleteID  = a.ID "
+    sql += "left join Divisions d on d.ID =dr.DivisionID "
+    sql += "left join AthleteTypes at2 on at2.ID = a.AthleteType "
+    sql+= "where dr.RaceID =" + raceid
+    try{
+        const query:string =  "select * from race"
+        const dbPath = path.join(process.cwd(), "public/assets/RaceTiming.db");
+        //console.log(dbPath)
+        const db = await open({filename: dbPath, // Specify the database file path
+        driver: sqlite3.Database, // Specify the database driver (sqlite3 in this case)
+    });
+
+        const races = await db.all(sql);
+        
+        return races;
+    }catch (e) {
+        return []
+    }
+    
+}
+
 
 export async function getRaces(): Promise<race[]> {
     let racesToReturn:race[] = [];
@@ -327,7 +358,10 @@ export async function getRaces(): Promise<race[]> {
         for(let idx in races){
             const race = races[idx];
             if(race.FinishDateTime != null){
-                let raceToAdd:race = {RaceId: race.ID, RaceDescription: race.RaceName, StartDateTime: String(new Date(race.StartDateTime))}
+                let raceToAdd:race = {
+                    RaceId: race.ID, RaceDescription: race.RaceName, StartDateTime: String(new Date(race.StartDateTime)),
+                    RaceShortName: race.RaceShortName
+                }
                 racesToReturn.push(raceToAdd);
             }
         }

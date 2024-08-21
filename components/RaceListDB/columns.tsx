@@ -29,6 +29,14 @@ export const columns: ColumnDef<race>[] = [
       return <Link href={"./"+row.getValue("RaceId")+ "/" + row.getValue("StartDateTime")}>{row.getValue("RaceDescription")}</Link>
     }
   },
+  {
+    accessorKey: "RaceShortName",
+    header: "Race Short Name",
+    cell: ({ row }) => {
+     
+      return <Link href={"./"+row.getValue("RaceId")+ "/" + row.getValue("StartDateTime")}>{row.getValue("RaceShortName")}</Link>
+    }
+  },
 
   {
     accessorKey: "StartDateTime",
@@ -45,4 +53,16 @@ export const columns: ColumnDef<race>[] = [
         return <Link href={"./"+row.getValue("RaceId")+ "/" + row.getValue("StartDateTime")}>{new Date(row.getValue("StartDateTime") + " GMT").toDateString()}</Link>
       }
   },
+  {
+
+    header: "Actions",
+    accessorKey: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const racer = row.original
+      return (
+        <Link href={"/dashboard/awards/" + racer.RaceId}>Awards</Link>
+      )
+    }
+  }
 ]

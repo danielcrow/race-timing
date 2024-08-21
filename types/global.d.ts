@@ -71,6 +71,7 @@ type initialStateAthlete = {
       RaceId: string;
       StartDateTime: string;
       RaceDescription: string;
+      RaceShortName: string
     
     }
     export type State = {
