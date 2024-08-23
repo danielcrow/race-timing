@@ -9,11 +9,11 @@ export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams
         const raceid = searchParams.get('raceid')
-        console.log(raceid)
+        //console.log(raceid)
 
         const query:string =  "select BibNumber as ChipNumber, FName as FirstName, LName as LastName, notes as BibNumber from Athlete where Raceid =" + raceid
         const dbPath = path.join(process.cwd(), "public/assets/RaceTiming.db");
-        console.log(dbPath)
+        //console.log(dbPath)
         const db = await open({filename: dbPath, // Specify the database file path
             driver: sqlite3.Database, // Specify the database driver (sqlite3 in this case)
         });

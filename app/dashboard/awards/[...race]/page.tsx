@@ -6,7 +6,7 @@ import {  ReactNode, ReactPortal,  } from "react";
 import { CreditCard } from "lucide-react";
 
 export default async function Page(pageParams:PageProps) {
-    console.log("Dan",pageParams.params.race)
+    //console.log("Dan",pageParams.params.race)
     const awards = await GetAwards(pageParams.params.race)
  
     const groupBy = (key: string | number) => (array: any[]) =>

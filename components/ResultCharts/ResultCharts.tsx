@@ -57,7 +57,7 @@ export default function ResultCharts(props: {raceId:string, athleteId:string }){
             
 
         let data = {"labels":lapDescription, "datasets": datasets}
-            console.log(data)
+            //console.log(data)
         setData(data)
     }
     getJobs()
