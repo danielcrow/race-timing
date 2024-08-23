@@ -2,7 +2,7 @@ import { GetAwards } from "@/app/actions/sqlliteactions"
 import { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle,CardDescription } from '@/components/ui/card'
 
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react";
+import {  ReactNode, ReactPortal,  } from "react";
 import { CreditCard } from "lucide-react";
 
 export default async function Page(pageParams:PageProps) {
